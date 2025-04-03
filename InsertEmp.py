@@ -1,7 +1,7 @@
 import psycopg2
 
 
-def insert_to_table(form_product_id):
+def insert_to_table():
     try:
         connection = psycopg2.connect(user="testdb_pc0s_user",
                                     password="CpWMnbHsqZM751EgEjbzHyhGGfXfNmPk",
@@ -11,7 +11,6 @@ def insert_to_table(form_product_id):
         cursor = connection.cursor()
 
         postgres_insert_query = """ INSERT INTO employee (personal_number, name) VALUES (%s,%s)"""
-        product_id =  str(form_product_id)
         record_to_insert = ('emp003', 'Mahmoud Seddik')
         cursor.execute(postgres_insert_query, record_to_insert)
 
@@ -29,4 +28,4 @@ def insert_to_table(form_product_id):
             connection.close()
             print("PostgreSQL connection is closed")
             
-insert_to_table(1)
+insert_to_table()
