@@ -6,6 +6,7 @@ app = Flask(__name__)
 @app.route('/run_script')
 def run_script():
     insert_to_table()
+    return 'Employee added successfully'
 
 @app.route("/", methods=['Get'])
 def home():
