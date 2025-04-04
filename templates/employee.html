@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block head %} 
+<style>
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+    th, td {
+        border: 1px solid black;
+        padding: 8px;
+        text-align: left;
+    }
+</style>
+{% endblock %}
+
+{% block body %} 
+<br>
+<button id="newPageButton">New</button>
+<script>
+    document.getElementById("newPageButton").addEventListener("click", function() {
+        window.location.href = "/new_emp"; 
+    });
+    </script>
+<h1>Employees Data</h1>
+<table>
+    <thead>
+        <tr>
+            {% if column_names %}
+            {% for column_name in column_names %}
+                <th>{{ column_name }}</th>
+            {% endfor %}
+            {% endif %}
+        </tr>
+    </thead>
+    <tbody>
+        {% for row in data %}
+            <tr>
+                {% for cell in row %}
+                    <td>{{ cell }}</td>
+                {% endfor %}
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
