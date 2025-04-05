@@ -1,7 +1,7 @@
 import psycopg2
 
 
-def insert_to_table():
+def insert_to_table(personal_number, employee_name):
     try:
         '''
         #Internal database host from cloud to cloud 
@@ -24,7 +24,7 @@ def insert_to_table():
         cursor = connection.cursor()
 
         postgres_insert_query = """ INSERT INTO employee (personal_number, name) VALUES (%s,%s)"""
-        record_to_insert = ('emp003', 'Mahmoud Seddik')
+        record_to_insert = (personal_number, employee_name)
         cursor.execute(postgres_insert_query, record_to_insert)
 
         connection.commit()
@@ -41,4 +41,3 @@ def insert_to_table():
             connection.close()
             print("PostgreSQL connection is closed")
             
-insert_to_table()
