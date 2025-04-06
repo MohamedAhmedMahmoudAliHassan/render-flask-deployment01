@@ -1,35 +1,17 @@
 import psycopg2
+from db_connection import connection
 
 
 def insert_to_table(personal_number, employee_name):
     try:
-
-        #Internal database host from cloud to cloud 
-        connection = psycopg2.connect(user="testdb_pc0s_user",
-                            password="CpWMnbHsqZM751EgEjbzHyhGGfXfNmPk",
-                            host="dpg-cvndib63jp1c738hnrn0-a",
-                            port="5432",
-                            database="testdb_pc0s")
- 
-
-        '''
-        # Internal database connection from local to local
-        connection = psycopg2.connect(user="postgres",
-                                    password="postgres",
-                                    host="127.0.0.1",
-                                    port="5432",
-                                    database="testdb")
-        '''
-
-
-        
-        cursor = connection.cursor()
+        conn = connection()
+        cursor = conn.cursor()
 
         postgres_insert_query = """ INSERT INTO employee (personal_number, name) VALUES (%s,%s)"""
         record_to_insert = (personal_number, employee_name)
         cursor.execute(postgres_insert_query, record_to_insert)
 
-        connection.commit()
+        conn.commit()
         count = cursor.rowcount
         print(count, "Record inserted successfully into mobile table")
 
@@ -40,6 +22,6 @@ def insert_to_table(personal_number, employee_name):
         # closing database connection.
         if connection:
             cursor.close()
-            connection.close()
+            conn.close()
             print("PostgreSQL connection is closed")
             
